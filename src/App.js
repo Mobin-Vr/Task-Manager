@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
-   const [taskList, setTaskList] = useState([]);
+   const [taskList, setTaskList] = useState(getListFromStorage);
 
    function handleAddItem(item) {
       setTaskList((list) => [...list, item]);
@@ -18,6 +18,15 @@ export default function App() {
          )
       );
    }
+
+   function getListFromStorage() {
+      const storedList = localStorage.getItem('taskList');
+      return JSON.parse(storedList);
+   }
+
+   useEffect(() => {
+      localStorage.setItem('taskList', JSON.stringify(taskList));
+   }, [taskList]);
 
    return (
       <div>
