@@ -21,7 +21,7 @@ export default function App() {
 
    function getListFromStorage() {
       const storedList = localStorage.getItem('taskList');
-      return JSON.parse(storedList);
+      return storedList ? JSON.parse(storedList) : [];
    }
 
    useEffect(() => {
